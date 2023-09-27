@@ -6,9 +6,9 @@ namespace BoardR
     {
         static void Main(string[] args)
         {
-            var tomorrow = DateTime.Now.AddDays(1);
-            var task = new Task("Write unit tests", "Peter", tomorrow);
-            var issue = new Issue("Review tests", "Someone must review Peter's tests.", tomorrow);
+            DateTime tomorrow = DateTime.Now.AddDays(1);
+            BoardItem task = new Task("Write unit tests", "Peter", tomorrow);
+            BoardItem issue = new Issue("Review tests", "Someone must review Peter's tests.", tomorrow);
 
             Board.AddItem(task);
             Board.AddItem(issue);
@@ -16,6 +16,9 @@ namespace BoardR
             issue.AdvanceStatus();
 
             Board.LogHistory(new ConsoleLogger());
+
+            //Console.WriteLine(task.ViewInfo()); 
+            //Console.WriteLine(issue.ViewInfo()); 
         }
     }
 }

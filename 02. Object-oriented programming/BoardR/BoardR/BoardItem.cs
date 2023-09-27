@@ -62,6 +62,46 @@ namespace BoardR
             }
         }
 
+        public abstract void RevertStatus();
+
+        public abstract void AdvanceStatus();
+
+        public virtual string ViewInfo()
+        {
+            return @$"'{this.Title}', [{this.Status}|{this.DueDate.ToString("dd-MM-yyyy")}]";
+        }
+
+        public string ViewHistory()
+        {
+            StringBuilder output = new StringBuilder();
+
+            foreach (EventLog log in this.history)
+            {
+                output.AppendLine(log.ViewInfo());
+            }
+
+            return output.ToString().TrimEnd();
+        }
+
+        public void ChangeTitle(string title)
+        {
+            string previousTitle = this.Title;
+            this.Title = title;
+            this.AddEventLog($"Title changed from '{previousTitle}' to '{this.Title}'");
+        }
+
+        public void ChangeDueDate(DateTime dueDate)
+        {
+            DateTime previousDueDate = this.DueDate;
+            this.DueDate = dueDate;
+            this.AddEventLog($"DueDate changed from '{previousDueDate:dd-MM-yyyy}' to '{this.DueDate:dd-MM-yyyy}'");
+        }
+
+        protected void AddEventLog(string description)
+        {
+            this.history.Add(new EventLog(description));
+        }
+
         private void ValidateTitle(string title)
         {
             if (string.IsNullOrEmpty(title))
@@ -81,46 +121,6 @@ namespace BoardR
             {
                 throw new ArgumentException("Date must not be in the past.");
             }
-        }
-
-        protected void AddEventLog(string description)
-        {
-            this.history.Add(new EventLog(description));
-        }
-
-        public abstract void RevertStatus();
-
-        public abstract void AdvanceStatus();       
-
-        public string ViewInfo()
-        {
-            return @$"'{this.Title}', [{this.Status}|{this.DueDate.ToString("dd-MM-yyyy")}]";
-        }
-
-        public string ViewHistory()
-        {
-            StringBuilder output = new StringBuilder();
-
-            foreach (EventLog log in this.history)
-            {
-                output.AppendLine(log.ViewInfo());
-            }
-
-            return output.ToString().TrimEnd();
-        }        
-
-        public void ChangeTitle(string title)
-        {
-            var previousTitle = this.Title;
-            this.Title = title;
-            this.AddEventLog($"Title changed from '{previousTitle}' to '{this.Title}'");
-        }
-
-        public void ChangeDueDate(DateTime dueDate)
-        {
-            var previousDueDate = this.DueDate;
-            this.DueDate = dueDate;
-            this.AddEventLog($"DueDate changed from '{previousDueDate:dd-MM-yyyy}' to '{this.DueDate:dd-MM-yyyy}'");
         }
     }
 }

@@ -10,7 +10,7 @@
             : base(title, dueDate, InitialStatus)
         {
             this.Description = description;
-            this.AddEventLog($"Created Issue: {this.ViewInfo()}. Description: {this.description}");
+            this.AddEventLog($"Created Issue: {this.ViewInfo()}");
         }
 
         public string Description
@@ -49,6 +49,11 @@
             {
                 this.AddEventLog($"Issue status already '{InitialStatus}'.");
             }
+        }
+
+        public override string ViewInfo()
+        {
+            return $"{this.GetType().Name}: {base.ViewInfo()} Description: {this.Description}";
         }
     }
 }

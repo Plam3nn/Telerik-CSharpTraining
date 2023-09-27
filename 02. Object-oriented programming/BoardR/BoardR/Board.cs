@@ -30,7 +30,7 @@ namespace BoardR
 
         public static void LogHistory(ILogger logger)
         {
-            foreach (var item in Items)
+            foreach (BoardItem item in Items)
             {
                 logger.Log(item.ViewHistory());
             }

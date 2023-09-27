@@ -43,7 +43,7 @@
 
         public void ChangeAssignee(string assignee)
         {
-            var previousAssignee = this.Assignee;
+            string previousAssignee = this.Assignee;
             this.Assignee = assignee;
             this.AddEventLog($"Assignee changed from {previousAssignee} to {this.Assignee}");
         }
@@ -52,7 +52,7 @@
         {
             if (this.Status != InitialStatus)
             {
-                var previousStatus = this.Status;
+                Status previousStatus = this.Status;
                 this.Status--;
                 this.AddEventLog($"Status changed from {previousStatus} to {this.Status}");
             }
@@ -66,7 +66,7 @@
         {
             if (this.Status != FinalStatus)
             {
-                var previousStatus = this.Status;
+                Status previousStatus = this.Status;
                 this.Status++;
                 this.AddEventLog($"Status changed from {previousStatus} to {this.Status}");
             }
@@ -74,6 +74,11 @@
             {
                 this.AddEventLog($"Status cannot be advanced. It is already '{FinalStatus}'.");
             }
+        }
+
+        public override string ViewInfo()
+        {
+            return $"{this.GetType().Name}: {base.ViewInfo()} Assignee: {this.Assignee}";
         }
     }
 }
