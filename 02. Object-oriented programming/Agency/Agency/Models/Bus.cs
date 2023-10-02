@@ -46,7 +46,5 @@ namespace Agency.Models
 
             return output.ToString();
         }
-
-        
     }
 }
