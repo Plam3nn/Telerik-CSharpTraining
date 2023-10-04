@@ -31,9 +31,7 @@ namespace Dealership.Commands
 
             foreach (var user in this.Repository.Users)
             {
-                output.Append($"{userCounter}. ");
-                output.AppendLine(user.ToString());
-                userCounter++;
+                output.AppendLine($"{userCounter++}. {user.ToString()}");
             }
 
             return output.ToString();

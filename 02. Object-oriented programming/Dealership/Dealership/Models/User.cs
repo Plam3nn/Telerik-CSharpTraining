@@ -1,6 +1,7 @@
 ﻿
 using Dealership.Exceptions;
 using Dealership.Models.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -160,7 +161,7 @@ namespace Dealership.Models
         {
             if (!this.vehicles.Any())
             {
-                throw new InvalidUserInputException(NoVehiclesHeader);
+                throw new InvalidUserInputException($"--USER {this.Username}-- {Environment.NewLine}{NoVehiclesHeader}");
             }
 
             StringBuilder output = new StringBuilder();
@@ -170,9 +171,7 @@ namespace Dealership.Models
 
             foreach (var vehicle in this.vehicles)
             {
-                output.Append(vehicleCounter);
-                output.AppendLine(vehicle.ToString());
-                vehicleCounter++;
+                output.AppendLine($"{vehicleCounter++}. {vehicle.ToString()}");
             }
 
             return output.ToString();

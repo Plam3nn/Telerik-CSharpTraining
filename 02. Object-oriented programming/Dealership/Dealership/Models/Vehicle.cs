@@ -32,6 +32,10 @@ namespace Dealership.Models
             this.Price = price;
         }
 
+        public abstract int Wheels { get; }
+
+        public abstract VehicleType Type { get; }
+
         public string Make
         {
             get
@@ -58,7 +62,6 @@ namespace Dealership.Models
             }
         }
 
-        public abstract VehicleType Type { get; }
 
         public decimal Price
         {
@@ -72,8 +75,6 @@ namespace Dealership.Models
                 this.price = value;
             }
         }
-
-        public abstract int Wheels { get; }
 
         public IList<IComment> Comments
         {
@@ -89,29 +90,29 @@ namespace Dealership.Models
         {
             StringBuilder output = new StringBuilder();
 
-            output.AppendLine($". {this.Type}:");
-            output.AppendLine($" Make: {this.Make}");
-            output.AppendLine($" Model: {this.Model}");
-            output.AppendLine($" Wheels: {this.Wheels}");
-            output.AppendLine($" Price: ${this.Price}");
-            output.AppendLine($" {this.AdditionalInfo()}");
+            output.AppendLine($"{this.Type}:");
+            output.AppendLine($"  Make: {this.Make}");
+            output.AppendLine($"  Model: {this.Model}");
+            output.AppendLine($"  Wheels: {this.Wheels}");
+            output.AppendLine($"  Price: ${this.Price}");
+            output.AppendLine($"  {this.AdditionalInfo()}");
 
             if (this.Comments.Any())
             {
-                output.AppendLine("--COMMENTS--");
+                output.AppendLine("    --COMMENTS--");
                 
                 foreach (var comment in this.Comments)
                 {
-                    output.AppendLine("----------");
-                    output.AppendLine($"{comment.ToString()}");
-                    output.AppendLine("----------");
+                    output.AppendLine("    ----------");
+                    output.AppendLine($"    {comment.ToString()}");
+                    output.AppendLine("    ----------");
                 }
 
-                output.AppendLine("--COMMENTS--");
+                output.Append("    --COMMENTS--");
             }
             else
             {
-                output.AppendLine("--NO COMMENTS--");
+                output.Append("    --NO COMMENTS--");
             }
 
             return output.ToString();

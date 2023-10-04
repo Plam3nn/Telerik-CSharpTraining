@@ -41,16 +41,15 @@ namespace Dealership.Core
 
         public bool UserExist(string username)
         {
-            bool result = false;
             foreach (IUser user in this.users)
             {
                 if (user.Username.Equals(username, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    result = true;
-                    break;
+                    return true;
                 }
             }
-            return result;
+
+            return false;
         }
 
         public IUser GetUser(string username)

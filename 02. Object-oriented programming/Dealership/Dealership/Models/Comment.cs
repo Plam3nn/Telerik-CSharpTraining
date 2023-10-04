@@ -49,7 +49,7 @@ namespace Dealership.Models
         {
             StringBuilder output = new StringBuilder();
             output.AppendLine($"{content}");
-            output.Append($"User: {this.Author}");
+            output.Append($"      User: {this.Author}");
 
             return output.ToString();
         }
