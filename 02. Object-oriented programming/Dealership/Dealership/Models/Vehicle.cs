@@ -118,6 +118,16 @@ namespace Dealership.Models
             return output.ToString();
         }
 
+        public void AddComment(IComment comment)
+        {
+            this.comments.Add(comment);
+        }
+
+        public void RemoveComment(IComment comment)
+        {
+            this.comments.Remove(comment);
+        }
+
         private void ValidatePrice(decimal price)
         {
             Validator.ValidateDecimalRange(price, MinPrice, MaxPrice, 
@@ -138,16 +148,6 @@ namespace Dealership.Models
 
             Validator.ValidateIntRange(make.Length, MakeMinLength, MakeMaxLength,
                 string.Format(InvalidMakeError, MakeMinLength, MakeMaxLength));
-        }
-
-        public void AddComment(IComment comment)
-        {
-            this.comments.Add(comment);
-        }
-
-        public void RemoveComment(IComment comment)
-        {
-            this.comments.Remove(comment);
         }
     }
 }

@@ -159,22 +159,26 @@ namespace Dealership.Models
 
         public string PrintVehicles()
         {
-            if (!this.vehicles.Any())
-            {
-                throw new InvalidUserInputException($"--USER {this.Username}-- {Environment.NewLine}{NoVehiclesHeader}");
-            }
-
             StringBuilder output = new StringBuilder();
             output.AppendLine($"--USER {this.Username}--");
 
-            int vehicleCounter = 1;
-
-            foreach (var vehicle in this.vehicles)
+            if (this.vehicles.Count == 0)
             {
-                output.AppendLine($"{vehicleCounter++}. {vehicle.ToString()}");
-            }
+                output.Append(NoVehiclesHeader);
 
-            return output.ToString();
+                throw new InvalidUserInputException(output.ToString());
+            }
+            else
+            {
+                int vehicleCounter = 1;
+
+                foreach (var vehicle in this.vehicles)
+                {
+                    output.AppendLine($"{vehicleCounter++}. {vehicle.ToString()}");
+                }
+
+                return output.ToString();
+            }           
         }
 
         public override string ToString()
