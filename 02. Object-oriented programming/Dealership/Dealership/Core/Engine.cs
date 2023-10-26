@@ -52,6 +52,7 @@ namespace Dealership.Core
                     {
                         Console.WriteLine(ex);
                     }
+
                     Console.WriteLine(ReportSeparator);
                 }
             }
